@@ -98,8 +98,8 @@ const App = () => {
 
   return (
     <div className="h-screen w-screen flex flex-col md:flex-row bg-bg-dark overflow-hidden relative">
-      {/* Background Map - Full screen on mobile, fills right side on desktop */}
-      <main className="absolute inset-x-2 inset-y-20 md:inset-auto md:relative md:flex-1 md:m-4 md:ml-0 md:rounded-xl md:border glass-morphism overflow-hidden z-0">
+      {/* Background Map - Reduced to 50% width and centered on mobile */}
+      <main className="absolute inset-x-[25%] top-[15%] h-[40%] md:inset-auto md:relative md:flex-1 md:m-4 md:ml-0 md:rounded-xl md:border glass-morphism overflow-hidden z-0 shadow-2xl">
         <MapComponent members={members} />
       </main>
 
