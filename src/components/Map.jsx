@@ -22,11 +22,19 @@ const MapComponent = ({ members }) => {
         : [37.5665, 126.9780]; // Default to Seoul
 
     return (
-        <div style={{ height: '100%', width: '100%', borderRadius: '16px', overflow: 'hidden' }}>
+        <div style={{
+            height: '100%',
+            minHeight: '400px',
+            width: '100%',
+            borderRadius: '16px',
+            overflow: 'hidden',
+            background: '#1e293b',
+            position: 'relative'
+        }}>
             <MapContainer
                 center={center}
                 zoom={13}
-                style={{ height: '100%', width: '100%' }}
+                style={{ height: '100%', width: '100%', position: 'absolute', top: 0, left: 0 }}
                 zoomControl={false}
             >
                 <TileLayer
