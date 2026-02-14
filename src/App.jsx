@@ -162,7 +162,7 @@ const App = () => {
           })}
         </div>
 
-        <div className="hidden md:block p-4 border-t border-glass-border">
+        <div className="p-2 md:p-4 border-t border-glass-border bg-white-low">
           <button className="w-full py-3 flex items-center justify-center gap-2 text-text-muted hover:text-text-main transition-colors">
             <Settings size={18} />
             <span>Settings</span>

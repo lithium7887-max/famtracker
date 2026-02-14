@@ -381,7 +381,7 @@ body {
   border: 1px solid var(--glass-border);
 }
 
-.bg-white\/5 {
+.bg-white-low {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
