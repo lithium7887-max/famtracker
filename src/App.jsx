@@ -89,46 +89,55 @@ const App = () => {
 
   if (!session) {
     return (
-      <div className="h-screen w-screen flex flex-col items-center justify-center bg-bg-dark p-4">
+      <div className="h-screen w-screen flex items-center justify-center bg-bg-dark p-6">
         <Auth />
-        <div className="fixed bottom-4 right-4 text-[10px] text-text-muted opacity-50">System Active v2</div>
       </div>
     );
   }
 
   return (
-    <div className="h-screen w-screen flex flex-col bg-bg-dark overflow-hidden p-2">
-      {/* v5 Debug Info */}
-      <div className="bg-primary/20 p-2 rounded text-[10px] mb-2 flex justify-between items-center z-[101]">
-        <span>v5 | User: {session?.user?.email?.split('@')[0]} | Members: {members.length}</span>
-        <button onClick={() => location.reload()} className="bg-primary px-2 py-0.5 rounded text-white">Refresh</button>
-      </div>
+    <div className="h-screen w-screen flex flex-col md:flex-row bg-bg-dark overflow-hidden">
+      {/* Map Area - 50% of height on mobile, full height on desktop */}
+      <main className="w-full h-[50dvh] md:h-full md:flex-1 relative z-0">
+        <MapComponent members={members} />
 
-      {/* Main Map Area - Centered and 50% width as requested */}
-      <div className="flex justify-center w-full mb-4">
-        <main className="w-50p h-200 glass-morphism overflow-hidden z-0">
-          <MapComponent members={members} />
-        </main>
-      </div>
+        {/* Overlay Header - Mobile Only */}
+        <div className="md:hidden absolute top-4 left-4 right-4 flex justify-between items-center z-10 pointer-events-none">
+          <div className="bg-bg-dark/80 backdrop-blur-md px-4 py-2 rounded-full border border-glass-border flex items-center gap-2 pointer-events-auto shadow-lg">
+            <MapPin className="text-primary" size={16} />
+            <span className="text-sm font-bold">Family Trace</span>
+          </div>
+          <button
+            onClick={() => supabase.auth.signOut()}
+            className="bg-bg-dark/80 backdrop-blur-md p-2 rounded-full border border-glass-border text-text-muted pointer-events-auto"
+          >
+            <LogOut size={18} />
+          </button>
+        </div>
+      </main>
 
-      {/* Sidebar - Below map on mobile */}
-      <aside className="flex-1 glass-morphism flex flex-col overflow-hidden z-10">
-        <div className="p-3 border-b border-glass-border flex justify-between items-center">
-          <h1 className="text-base font-bold flex items-center gap-2">
-            <MapPin className="text-primary" size={18} /> Family Tracking
+      {/* Sidebar - Bottom half on mobile, side on desktop */}
+      <aside className="flex-1 md:w-sidebar md:max-w-md bg-bg-dark md:border-l border-glass-border flex flex-col z-10 overflow-hidden shadow-[0_-10px_30px_rgba(0,0,0,0.5)] md:shadow-none">
+        <div className="p-4 md:p-6 border-b border-glass-border hidden md:flex justify-between items-center">
+          <h1 className="text-xl font-bold flex items-center gap-2">
+            <MapPin className="text-primary" size={24} /> Family
           </h1>
-          <button onClick={() => supabase.auth.signOut()} className="text-text-muted hover:text-red-400 p-2">
+          <button onClick={() => supabase.auth.signOut()} className="text-text-muted hover:text-red-400 p-1">
             <LogOut size={20} />
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
-          <div className="flex items-center justify-between px-2 mb-2">
-            <h2 className="text-xs font-semibold text-text-muted uppercase tracking-wider">Active Members</h2>
-            <Users size={16} className="text-text-muted" />
+        <div className="flex-1 overflow-y-auto p-4 space-y-3">
+          <div className="flex items-center justify-between px-2 mb-1">
+            <h2 className="text-[10px] md:text-xs font-semibold text-text-muted uppercase tracking-wider">Active Members</h2>
+            <Users size={14} className="text-text-muted" />
           </div>
 
-          {!members.length && <div className="text-center text-text-muted py-4">Finding members...</div>}
+          {!members.length && (
+            <div className="text-center py-10 text-text-muted text-sm">
+              Waiting for member locations...
+            </div>
+          )}
 
           {members && members.map(member => {
             if (!member || !member.id) return null;
@@ -137,31 +146,29 @@ const App = () => {
             const time = member.updated_at ? new Date(member.updated_at).toLocaleTimeString() : 'N/A';
 
             return (
-              <div key={member.id} className="flex items-center gap-3 p-3 rounded-xl bg-bg-card border border-glass-border hover:border-primary transition-colors cursor-pointer">
+              <div key={member.id} className="flex items-center gap-3 p-3 rounded-xl bg-bg-card/40 border border-glass-border hover:border-primary/50 transition-colors cursor-pointer">
                 <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold uppercase">
                   {initial}
                 </div>
                 <div className="flex-1 overflow-hidden">
-                  <p className="font-medium truncate text-sm">{name}</p>
-                  <p className="text-[10px] text-text-muted truncate">{time}</p>
+                  <p className="font-medium truncate text-sm md:text-base">{name}</p>
+                  <p className="text-[10px] md:text-xs text-text-muted truncate">{time}</p>
                 </div>
                 {session && session.user && member.id === session.user.id && (
-                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.6)]" />
                 )}
               </div>
             );
           })}
         </div>
 
-        <div className="p-4 border-t border-glass-border">
-          <button className="w-full py-2 bg-primary/10 rounded flex items-center justify-center gap-2 text-text-muted">
+        <div className="p-4 border-t border-glass-border bg-bg-dark/50 hidden md:block">
+          <button className="w-full py-3 flex items-center justify-center gap-2 text-text-muted hover:text-text-main transition-colors">
             <Settings size={18} />
             <span>Settings</span>
           </button>
         </div>
       </aside>
-
-      <div className="fixed bottom-2 right-2 text-[8px] text-primary font-bold z-[100] opacity-30">v5 System</div>
     </div>
   );
 }
