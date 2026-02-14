@@ -48,7 +48,7 @@ body,
 }
 
 .justify-center {
-  justify-content: justify-center;
+  justify-content: center;
 }
 
 .gap-2 {
@@ -75,6 +75,10 @@ body,
   height: 100dvh;
 }
 
+.h-full {
+  height: 100%;
+}
+
 .w-screen {
   width: 100vw;
 }
@@ -83,8 +87,33 @@ body,
   width: 100%;
 }
 
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mt-20 {
+  margin-top: 5rem;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
 .m-4 {
   margin: 1rem;
+}
+
+.p-8 {
+  padding: 2rem;
 }
 
 .p-4 {
@@ -104,6 +133,11 @@ body,
   padding-right: 0.5rem;
 }
 
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
 .space-y-4>*+* {
   margin-top: 1rem;
 }
@@ -116,6 +150,10 @@ body,
   border-radius: 0.75rem;
 }
 
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
 .rounded-full {
   border-radius: 9999px;
 }
@@ -124,6 +162,96 @@ body,
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.block {
+  display: block;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.tracking-wider {
+  letter-spacing: 0.05em;
+}
+
+.hover\:underline:hover {
+  text-decoration: underline;
+}
+
+.focus\:outline-none:focus {
+  outline: none;
+}
+
+.focus\:border-primary:focus {
+  border-color: var(--primary);
+}
+
+.border {
+  border: 1px solid var(--glass-border);
+}
+
+.border-b {
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.border-t {
+  border-top: 1px solid var(--glass-border);
+}
+
+.bg-primary {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+}
+
+.hover\:bg-primary-hover:hover {
+  background-color: var(--primary-hover);
+}
+
+.bg-bg-card {
+  background-color: var(--bg-card);
+}
+
+.bg-bg-dark {
+  background-color: var(--bg-dark);
+}
+
+.max-w-md {
+  max-width: 28rem;
 }
 
 /* Responsive */

@@ -138,7 +138,7 @@ function App() {
       </aside>
 
       {/* Main Map Area */}
-      <main className="flex-1 relative m-4 md:ml-0 glass-morphism shadow-2xl overflow-hidden">
+      <main className="flex-1 relative m-4 md:ml-0 glass-morphism shadow-2xl overflow-hidden flex flex-col">
         <MapComponent members={members} />
       </main>
     </div>
