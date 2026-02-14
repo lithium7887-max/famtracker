@@ -4,10 +4,12 @@ import Auth from './components/Auth';
 import MapComponent from './components/Map';
 import { Users, LogOut, MapPin, Settings } from 'lucide-react';
 
-function App() {
+const App = () => {
   const [session, setSession] = useState(null);
   const [members, setMembers] = useState([]);
-  const [userLocation, setUserLocation] = useState(null);
+
+  // Basic rendering check to ensure we don't return null and cause a white screen
+  console.log("App Rendering - Session:", !!session);
 
   useEffect(() => {
     if (!supabase) return;

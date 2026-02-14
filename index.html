@@ -3,32 +3,40 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="https://cdn-icons-png.flaticon.com/512/854/854878.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
   <title>Family Trace</title>
-  <link rel="manifest" href="/manifest.json" />
-  <meta name="theme-color" content="#6366f1" />
+  <style>
+    body,
+    html {
+      background-color: #0f172a !important;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      color: white;
+      font-family: sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
 </head>
 
-<body>
-  <div id="root"></div>
+<body style="background-color: #0f172a;">
+  <div id="root">
+    <div style="text-align: center;"> loading... </div>
+  </div>
   <script type="module" src="/src/main.jsx"></script>
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then(function (registrations) {
-        for (let registration of registrations) {
-          registration.unregister();
-        }
-      });
-    }
-    // Clear corrupted Supabase sessions once
+    // nuclear reset
     try {
-      if (!localStorage.getItem('reset_done_v1')) {
-        Object.keys(localStorage).forEach(key => {
-          if (key.startsWith('sb-')) localStorage.removeItem(key);
-        });
-        localStorage.setItem('reset_done_v1', 'true');
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(r => r.unregister()));
       }
+      localStorage.clear();
+      sessionStorage.clear();
+      console.log("Storage cleared");
     } catch (e) { }
   </script>
 </body>
