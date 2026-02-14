@@ -4,8 +4,12 @@ import './index.css'
 import 'leaflet/dist/leaflet.css'
 import App from './App.jsx'
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+try {
+  createRoot(document.getElementById('root')).render(
+    <StrictMode>
+      <App />
+    </StrictMode>,
+  )
+} catch (err) {
+  document.getElementById('root').innerHTML = `<div style="padding: 20px; color: white;">Critical Render Error: ${err.message}</div>`;
+}
