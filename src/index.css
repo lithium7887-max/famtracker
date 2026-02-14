@@ -87,6 +87,10 @@ body {
   margin: 1rem;
 }
 
+.m-2 {
+  margin: 0.5rem;
+}
+
 .mt-20 {
   margin-top: 5rem;
 }
@@ -97,6 +101,14 @@ body {
 
 .mb-6 {
   margin-bottom: 1.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
 }
 
 .mb-1 {
@@ -122,6 +134,19 @@ body {
 
 .p-3 {
   padding: 0.75rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+/* Fixed Heights with margin compensation */
+.h-mobile-map {
+  height: 55dvh;
+}
+
+.h-mobile-list {
+  height: calc(45dvh - 2rem);
 }
 
 .px-2 {
