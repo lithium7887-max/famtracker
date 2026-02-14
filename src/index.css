@@ -19,15 +19,12 @@
 html,
 body,
 #root {
-  height: 100vh;
-  height: 100dvh;
-  width: 100vw;
-  background-color: #0f172a;
-}
-
-body {
-  color: var(--text-main);
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
+  background-color: #0f172a;
 }
 
 /* Layout */

@@ -96,28 +96,28 @@ const App = () => {
   }
 
   return (
-    <div className="h-screen w-screen flex flex-col bg-bg-dark overflow-hidden">
-      {/* Map Area - Forced 80% Height */}
-      <main className="flex-[8] relative z-0 border-b border-glass-border">
+    <div className="fixed inset-0 bg-bg-dark overflow-hidden">
+      {/* Background Map - Guaranteed 100% */}
+      <div className="absolute inset-0 z-0">
         <MapComponent members={members} />
+      </div>
 
-        {/* Simple Header Overlay */}
-        <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-10 pointer-events-none">
-          <div className="bg-bg-dark/80 backdrop-blur-md px-4 py-2 rounded-full border border-glass-border flex items-center gap-2 pointer-events-auto shadow-lg">
-            <MapPin className="text-primary" size={16} />
-            <span className="text-sm font-bold">Family Trace</span>
-          </div>
-          <button
-            onClick={() => supabase.auth.signOut()}
-            className="bg-bg-dark/80 backdrop-blur-md p-2 rounded-full border border-glass-border text-text-muted hover:text-red-400 pointer-events-auto"
-          >
-            <LogOut size={18} />
-          </button>
+      {/* Floating Header */}
+      <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-20 pointer-events-none">
+        <div className="bg-bg-dark/80 backdrop-blur-md px-4 py-2 rounded-full border border-glass-border flex items-center gap-2 pointer-events-auto shadow-xl">
+          <MapPin className="text-primary" size={16} />
+          <span className="text-sm font-bold">Family Trace</span>
         </div>
-      </main>
+        <button
+          onClick={() => supabase.auth.signOut()}
+          className="bg-bg-dark/80 backdrop-blur-md p-2 rounded-full border border-glass-border text-text-muted hover:text-red-400 pointer-events-auto shadow-xl"
+        >
+          <LogOut size={18} />
+        </button>
+      </div>
 
-      {/* Family List Area - 20% Height */}
-      <aside className="flex-[2] bg-bg-dark flex flex-col z-10 overflow-hidden">
+      {/* Floating Bottom Card */}
+      <aside className="absolute bottom-6 left-4 right-4 max-h-[30dvh] bg-bg-dark/95 backdrop-blur-xl rounded-3xl border border-glass-border flex flex-col z-10 shadow-2xl overflow-hidden pointer-events-auto">
         <div className="flex-1 overflow-y-auto p-4 space-y-3">
           <div className="flex items-center justify-between px-2 mb-1">
             <h2 className="text-[10px] font-semibold text-text-muted uppercase tracking-wider">Family Members</h2>
@@ -125,8 +125,8 @@ const App = () => {
           </div>
 
           {!members.length && (
-            <div className="text-center py-4 text-text-muted text-xs">
-              Finding members...
+            <div className="text-center py-4 text-text-muted text-xs italic">
+              Searching for locations...
             </div>
           )}
 
@@ -137,13 +137,12 @@ const App = () => {
             const time = member.updated_at ? new Date(member.updated_at).toLocaleTimeString() : 'N/A';
 
             return (
-              <div key={member.id} className="flex items-center gap-3 p-3 rounded-xl bg-bg-card/40 border border-glass-border">
+              <div key={member.id} className="flex items-center gap-3 p-3 rounded-2xl bg-white/5 border border-white/5 hover:border-primary/30 transition-colors">
                 <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold uppercase text-xs">
                   {initial}
                 </div>
                 <div className="flex-1 overflow-hidden">
-                  <p className="font-medium truncate text-sm">{name}</p>
-                  <p className="text-[10px] text-text-muted">{time}</p>
+                  <p className="font-medium truncate text-xs">{name}</p>
                 </div>
                 {session && session.user && member.id === session.user.id && (
                   <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
@@ -158,4 +157,3 @@ const App = () => {
 }
 
 export default App;
-```
