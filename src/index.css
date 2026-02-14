@@ -273,42 +273,104 @@ body {
   letter-spacing: 0.05em;
 }
 
+.absolute {
+  position: absolute;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.inset-0 {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.top-0 {
+  top: 0;
+}
+
+.bottom-0 {
+  bottom: 0;
+}
+
+.left-0 {
+  left: 0;
+}
+
+.right-0 {
+  right: 0;
+}
+
+.z-0 {
+  z-index: 0;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+.z-20 {
+  z-index: 20;
+}
+
+.z-30 {
+  z-index: 30;
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+.pointer-events-auto {
+  pointer-events: auto;
+}
+
+/* Mobile Bottom Sheet */
+.mobile-bottom-sheet {
+  background: var(--bg-card);
+  border-top: 1px solid var(--glass-border);
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -10px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
 @media (min-width: 768px) {
-  .md\:flex-row {
-    flex-direction: row;
+  .md\:relative {
+    position: relative;
+  }
+
+  .md\:static {
+    position: static;
+  }
+
+  .md\:inset-auto {
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+  }
+
+  .md\:h-auto {
+    height: auto;
   }
 
   .md\:w-80 {
     width: 20rem;
   }
 
-  .md\:ml-0 {
-    margin-left: 0;
+  .md\:m-4 {
+    margin: 1rem;
   }
 
-  .md\:order-1 {
-    order: 1;
+  .md\:rounded-xl {
+    border-radius: 0.75rem;
   }
 
-  .md\:order-2 {
-    order: 2;
+  .md\:border {
+    border: 1px solid var(--glass-border);
   }
-}
-
-.order-1 {
-  order: 1;
-}
-
-.order-2 {
-  order: 2;
-}
-
-.h-40 {
-  height: 40%;
-}
-
-.h-60 {
-  height: 60%;
 }
 
 /* UI Components */
