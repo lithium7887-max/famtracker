@@ -140,15 +140,6 @@ body {
   padding: 0.5rem;
 }
 
-/* Fixed Heights with margin compensation */
-.h-mobile-map {
-  height: 55dvh;
-}
-
-.h-mobile-list {
-  height: calc(45dvh - 2rem);
-}
-
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -157,6 +148,11 @@ body {
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .shadow-2xl {
