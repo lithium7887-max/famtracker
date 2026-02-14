@@ -16,6 +16,16 @@ let DefaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
+const Recenter = ({ center }) => {
+    const map = useMap();
+    React.useEffect(() => {
+        if (center) {
+            map.setView(center, map.getZoom(), { animate: true });
+        }
+    }, [center, map]);
+    return null;
+};
+
 const MapComponent = ({ members }) => {
     const validMembers = Array.isArray(members) ? members : [];
     const center = validMembers.length > 0
@@ -42,6 +52,7 @@ const MapComponent = ({ members }) => {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
+                <Recenter center={center} />
                 {validMembers.map((member) => (
                     member && member.lat && member.lng && (
                         <Marker key={member.id} position={[member.lat, member.lng]}>
