@@ -93,27 +93,27 @@ const App = () => {
   }
 
   return (
-    <div className="h-screen w-screen flex flex-col md:flex-row bg-bg-dark overflow-hidden p-2 md:p-0">
-      {/* Main Map Area */}
-      <main className="relative flex flex-col order-1 md:order-2 flex-7 md:flex-1 md:m-4 md:ml-0 glass-morphism shadow-2xl overflow-hidden mb-2 md:mb-0">
+    <div className="h-screen w-screen flex flex-col md:flex-row bg-bg-dark overflow-hidden p-0 md:p-0">
+      {/* Main Map Area - flex-8 (80% on mobile) */}
+      <main className="relative flex flex-col order-1 md:order-2 flex-8 md:flex-1 md:m-4 md:ml-0 glass-morphism shadow-2xl overflow-hidden">
         <MapComponent members={members} />
       </main>
 
-      {/* Sidebar */}
-      <aside className="w-full md:w-80 glass-morphism flex flex-col shadow-2xl order-2 md:order-1 flex-3 md:h-auto md:m-4 overflow-hidden">
-        <div className="p-3 md:p-6 border-b border-glass-border flex justify-between items-center bg-white/5">
-          <h1 className="text-base md:text-xl font-bold flex items-center gap-2">
-            <MapPin className="text-primary" size={18} /> Family
+      {/* Sidebar - flex-2 (20% on mobile) */}
+      <aside className="w-full md:w-80 glass-morphism flex flex-col shadow-2xl order-2 md:order-1 flex-2 md:h-auto md:m-4 overflow-hidden">
+        <div className="p-2 md:p-6 border-b border-glass-border flex justify-between items-center bg-white/5">
+          <h1 className="text-sm md:text-xl font-bold flex items-center gap-2 px-2">
+            <MapPin className="text-primary" size={16} /> Family
           </h1>
           <button onClick={() => supabase.auth.signOut()} className="text-text-muted hover:text-red-400 p-1">
-            <LogOut size={18} />
+            <LogOut size={16} />
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-2 md:p-4 space-y-2 md:space-y-4">
-          <div className="flex items-center justify-between px-2 py-1">
+        <div className="flex-1 overflow-y-auto p-2 md:p-4 space-y-1 md:space-y-4">
+          <div className="flex items-center justify-between px-2 py-0.5">
             <h2 className="text-[10px] md:text-xs font-semibold text-text-muted uppercase tracking-wider">Members</h2>
-            <Users size={14} className="text-text-muted" />
+            <Users size={12} className="text-text-muted" />
           </div>
 
           {members && members.map(member => {
@@ -123,13 +123,13 @@ const App = () => {
             const time = member.updated_at ? new Date(member.updated_at).toLocaleTimeString() : 'N/A';
 
             return (
-              <div key={member.id} className="flex items-center gap-2 md:gap-3 p-2 md:p-3 rounded-lg md:rounded-xl bg-bg-card border border-glass-border hover:border-primary transition-colors cursor-pointer">
-                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold uppercase text-xs md:text-base">
+              <div key={member.id} className="flex items-center gap-2 md:gap-3 p-1.5 md:p-3 rounded-lg md:rounded-xl bg-bg-card border border-glass-border hover:border-primary transition-colors cursor-pointer">
+                <div className="w-6 h-6 md:w-10 md:h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold uppercase text-[10px] md:text-base">
                   {initial}
                 </div>
                 <div className="flex-1 overflow-hidden">
-                  <p className="font-medium truncate text-xs md:text-base">{name}</p>
-                  <p className="text-[10px] md:text-xs text-text-muted truncate">{time}</p>
+                  <p className="font-medium truncate text-[11px] md:text-base">{name}</p>
+                  <p className="text-[9px] md:text-xs text-text-muted truncate">{time}</p>
                 </div>
                 {session && session.user && member.id === session.user.id && (
                   <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-green-500 animate-pulse" />
@@ -139,7 +139,7 @@ const App = () => {
           })}
         </div>
 
-        <div className="p-2 md:p-4 border-t border-glass-border bg-white/5">
+        <div className="hidden md:block p-2 md:p-4 border-t border-glass-border bg-white/5">
           <button className="w-full py-2 md:py-3 flex items-center justify-center gap-2 text-text-muted hover:text-text-main transition-colors text-xs md:text-base">
             <Settings size={16} />
             <span>Settings</span>
