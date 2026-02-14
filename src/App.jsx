@@ -97,49 +97,38 @@ const App = () => {
   }
 
   return (
-    <div className="h-screen w-screen flex flex-col md:flex-row bg-bg-dark overflow-hidden relative">
-      {/* Background Map - Forced to 50% width and 30% height on mobile */}
-      <main className="absolute inset-x-1/4 top-[10%] w-half-forced h-30-forced md:inset-auto md:relative md:flex-1 md:m-4 md:ml-0 md:rounded-xl md:border glass-morphism overflow-hidden z-0 shadow-2xl">
-        <MapComponent members={members} />
-      </main>
-
-      {/* Brand Header Overlay - Mobile only */}
-      <div className="md:hidden absolute top-0 left-0 right-0 p-4 flex justify-between items-center z-[100] pointer-events-none">
-        <div className="bg-bg-dark/80 backdrop-blur-md px-4 py-2 rounded-full border border-glass-border flex items-center gap-2 pointer-events-auto shadow-lg">
-          <MapPin className="text-primary" size={16} />
-          <span className="text-sm font-bold">Family Trace</span>
-        </div>
-        <button
-          onClick={() => supabase.auth.signOut()}
-          className="bg-bg-dark/80 backdrop-blur-md p-2 rounded-full border border-glass-border text-text-muted hover:text-red-400 pointer-events-auto shadow-lg"
-        >
-          <LogOut size={18} />
-        </button>
+    <div className="h-screen w-screen flex flex-col bg-bg-dark overflow-hidden p-2">
+      {/* v5 Debug Info */}
+      <div className="bg-primary/20 p-2 rounded text-[10px] mb-2 flex justify-between items-center z-[101]">
+        <span>v5 | User: {session?.user?.email?.split('@')[0]} | Members: {members.length}</span>
+        <button onClick={() => location.reload()} className="bg-primary px-2 py-0.5 rounded text-white">Refresh</button>
       </div>
 
-      <div className="fixed bottom-2 right-2 text-[8px] text-primary font-bold z-[100]">System Active v4</div>
+      {/* Main Map Area - Centered and 50% width as requested */}
+      <div className="flex justify-center w-full mb-4">
+        <main className="w-50p h-200 glass-morphism overflow-hidden z-0">
+          <MapComponent members={members} />
+        </main>
+      </div>
 
-      {/* Sidebar / Bottom Sheet */}
-      <aside className="absolute bottom-0 left-0 right-0 md:relative md:bottom-auto md:left-auto md:right-auto md:w-sidebar md:max-w-md md:m-4 md:rounded-xl md:border glass-morphism flex flex-col z-10 max-h-[45dvh] md:max-h-none">
-        {/* Handle for mobile swipe feel */}
-        <div className="md:hidden flex justify-center p-2">
-          <div className="w-12 h-1.5 bg-glass-border rounded-full" />
-        </div>
-
-        <div className="p-3 md:p-6 border-b border-glass-border hidden md:flex justify-between items-center">
-          <h1 className="text-xl font-bold flex items-center gap-2">
-            <MapPin className="text-primary" size={20} /> Family
+      {/* Sidebar - Below map on mobile */}
+      <aside className="flex-1 glass-morphism flex flex-col overflow-hidden z-10">
+        <div className="p-3 border-b border-glass-border flex justify-between items-center">
+          <h1 className="text-base font-bold flex items-center gap-2">
+            <MapPin className="text-primary" size={18} /> Family Tracking
           </h1>
-          <button onClick={() => supabase.auth.signOut()} className="text-text-muted hover:text-red-400 p-1">
+          <button onClick={() => supabase.auth.signOut()} className="text-text-muted hover:text-red-400 p-2">
             <LogOut size={20} />
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-4 space-y-3">
-          <div className="flex items-center justify-between px-2 mb-1">
-            <h2 className="text-[10px] md:text-sm font-semibold text-text-muted uppercase tracking-wider">Family Members</h2>
-            <Users size={14} className="text-text-muted" />
+        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          <div className="flex items-center justify-between px-2 mb-2">
+            <h2 className="text-xs font-semibold text-text-muted uppercase tracking-wider">Active Members</h2>
+            <Users size={16} className="text-text-muted" />
           </div>
+
+          {!members.length && <div className="text-center text-text-muted py-4">Finding members...</div>}
 
           {members && members.map(member => {
             if (!member || !member.id) return null;
@@ -148,29 +137,31 @@ const App = () => {
             const time = member.updated_at ? new Date(member.updated_at).toLocaleTimeString() : 'N/A';
 
             return (
-              <div key={member.id} className="flex items-center gap-3 p-3 rounded-xl bg-bg-card/50 border border-glass-border hover:border-primary transition-colors cursor-pointer backdrop-blur-sm">
-                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold uppercase text-sm md:text-base">
+              <div key={member.id} className="flex items-center gap-3 p-3 rounded-xl bg-bg-card border border-glass-border hover:border-primary transition-colors cursor-pointer">
+                <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold uppercase">
                   {initial}
                 </div>
                 <div className="flex-1 overflow-hidden">
-                  <p className="font-medium truncate text-sm md:text-base">{name}</p>
-                  <p className="text-[10px] md:text-xs text-text-muted truncate">{time}</p>
+                  <p className="font-medium truncate text-sm">{name}</p>
+                  <p className="text-[10px] text-text-muted truncate">{time}</p>
                 </div>
                 {session && session.user && member.id === session.user.id && (
-                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
+                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                 )}
               </div>
             );
           })}
         </div>
 
-        <div className="p-2 md:p-4 border-t border-glass-border bg-white-low">
-          <button className="w-full py-3 flex items-center justify-center gap-2 text-text-muted hover:text-text-main transition-colors">
+        <div className="p-4 border-t border-glass-border">
+          <button className="w-full py-2 bg-primary/10 rounded flex items-center justify-center gap-2 text-text-muted">
             <Settings size={18} />
             <span>Settings</span>
           </button>
         </div>
       </aside>
+
+      <div className="fixed bottom-2 right-2 text-[8px] text-primary font-bold z-[100] opacity-30">v5 System</div>
     </div>
   );
 }

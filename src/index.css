@@ -405,15 +405,36 @@ body {
 }
 
 /* UI Components */
-.glass-morphism {
-  background: var(--glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
+.bg-debug-red {
+  background-color: #ef4444 !important;
 }
 
-.bg-white-low {
-  background-color: rgba(255, 255, 255, 0.05);
+.bg-debug-blue {
+  background-color: #3b82f6 !important;
+}
+
+.bg-debug-card {
+  background-color: #1e293b !important;
+  border: 2px solid white !important;
+}
+
+.w-50p {
+  width: 50% !important;
+}
+
+.h-150 {
+  height: 150px !important;
+}
+
+.h-200 {
+  height: 200px !important;
+}
+
+.glass-morphism {
+  background: #1e293b !important;
+  /* Force opaque for debug */
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
 }
 
 .bg-bg-dark {
