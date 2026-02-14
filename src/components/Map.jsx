@@ -19,8 +19,12 @@ L.Marker.prototype.options.icon = DefaultIcon;
 const Recenter = ({ center }) => {
     const map = useMap();
     React.useEffect(() => {
-        if (center) {
-            map.setView(center, map.getZoom(), { animate: true });
+        if (center && Array.isArray(center) && center.length === 2) {
+            try {
+                map.setView(center, map.getZoom(), { animate: true });
+            } catch (err) {
+                console.error("Map centering error:", err);
+            }
         }
     }, [center, map]);
     return null;
@@ -53,8 +57,9 @@ const MapComponent = ({ members }) => {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <Recenter center={center} />
-                {validMembers.map((member) => (
-                    member && member.lat && member.lng && (
+                {validMembers.map((member) => {
+                    if (!member || member.lat === undefined || member.lng === undefined) return null;
+                    return (
                         <Marker key={member.id} position={[member.lat, member.lng]}>
                             <Popup>
                                 <div className="p-2">
@@ -63,8 +68,8 @@ const MapComponent = ({ members }) => {
                                 </div>
                             </Popup>
                         </Marker>
-                    )
-                ))}
+                    );
+                })}
             </MapContainer>
         </div>
     );
