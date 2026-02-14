@@ -97,8 +97,8 @@ const App = () => {
 
   return (
     <div className="h-screen w-screen flex flex-col md:flex-row bg-bg-dark overflow-hidden">
-      {/* Map Area - 50% of height on mobile, full height on desktop */}
-      <main className="w-full h-[50dvh] md:h-full md:flex-1 relative z-0">
+      {/* Map Area - 70% of height on mobile, full height on desktop */}
+      <main className="w-full h-[70dvh] md:h-full md:flex-1 relative z-0">
         <MapComponent members={members} />
 
         {/* Overlay Header - Mobile Only */}

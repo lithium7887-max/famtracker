@@ -47,14 +47,15 @@
   </div>
   <script type="module" src="/src/main.jsx"></script>
   <script>
-    // nuclear reset
+    // normal boot (removed nuclear reset)
     try {
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(r => r.unregister()));
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (let registration of regs) {
+            registration.unregister();
+          }
+        });
       }
-      localStorage.clear();
-      sessionStorage.clear();
-      console.log("Storage cleared");
     } catch (e) { }
   </script>
 </body>
