@@ -1,0 +1,17 @@
+{
+  "short_name": "FamilyTrace",
+  "name": "Family Trace - Location Tracker",
+  "icons": [
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0f172a",
+  "display": "standalone",
+  "theme_color": "#6366f1",
+  "description": "Real-time family location sharing app."
+}
