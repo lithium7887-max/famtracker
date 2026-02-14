@@ -104,18 +104,20 @@ const App = () => {
       </main>
 
       {/* Brand Header Overlay - Mobile only */}
-      <div className="md:hidden absolute top-0 left-0 right-0 p-4 flex justify-between items-center z-20 pointer-events-none">
-        <div className="bg-bg-dark/60 backdrop-blur-md px-4 py-2 rounded-full border border-glass-border flex items-center gap-2 pointer-events-auto">
+      <div className="md:hidden absolute top-0 left-0 right-0 p-4 flex justify-between items-center z-[100] pointer-events-none">
+        <div className="bg-bg-dark/80 backdrop-blur-md px-4 py-2 rounded-full border border-glass-border flex items-center gap-2 pointer-events-auto shadow-lg">
           <MapPin className="text-primary" size={16} />
           <span className="text-sm font-bold">Family Trace</span>
         </div>
         <button
           onClick={() => supabase.auth.signOut()}
-          className="bg-bg-dark/60 backdrop-blur-md p-2 rounded-full border border-glass-border text-text-muted hover:text-red-400 pointer-events-auto"
+          className="bg-bg-dark/80 backdrop-blur-md p-2 rounded-full border border-glass-border text-text-muted hover:text-red-400 pointer-events-auto shadow-lg"
         >
           <LogOut size={18} />
         </button>
       </div>
+
+      <div className="fixed bottom-2 right-2 text-[8px] text-primary font-bold z-[100]">System Active v3</div>
 
       {/* Sidebar / Bottom Sheet */}
       <aside className="absolute bottom-0 left-0 right-0 md:relative md:bottom-auto md:left-auto md:right-auto md:w-80 md:m-4 md:rounded-xl md:border glass-morphism flex flex-col z-10 max-h-[40dvh] md:max-h-none">
