@@ -88,7 +88,12 @@ const App = () => {
   };
 
   if (!session) {
-    return <Auth />;
+    return (
+      <div className="h-screen w-screen flex flex-col items-center justify-center bg-bg-dark p-4">
+        <Auth />
+        <div className="fixed bottom-4 right-4 text-[10px] text-text-muted opacity-50">System Active v2</div>
+      </div>
+    );
   }
 
   return (
