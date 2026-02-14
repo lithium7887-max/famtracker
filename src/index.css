@@ -379,7 +379,6 @@ body {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--glass-border);
-  border-radius: 16px;
 }
 
 .bg-white\/5 {

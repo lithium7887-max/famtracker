@@ -33,7 +33,6 @@ const App = () => {
         (position) => {
           if (!supabase) return;
           const { latitude, longitude } = position.coords;
-          setUserLocation({ lat: latitude, lng: longitude });
           updateLocationInSupabase(latitude, longitude);
         },
         (error) => console.error(error),
