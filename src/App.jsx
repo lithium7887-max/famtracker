@@ -98,8 +98,8 @@ const App = () => {
 
   return (
     <div className="h-screen w-screen flex flex-col md:flex-row bg-bg-dark overflow-hidden relative">
-      {/* Background Map - Reduced to 50% width and centered on mobile */}
-      <main className="absolute inset-x-[25%] top-[15%] h-[40%] md:inset-auto md:relative md:flex-1 md:m-4 md:ml-0 md:rounded-xl md:border glass-morphism overflow-hidden z-0 shadow-2xl">
+      {/* Background Map - Forced to 50% width and 30% height on mobile */}
+      <main className="absolute inset-x-1/4 top-[10%] w-half-forced h-30-forced md:inset-auto md:relative md:flex-1 md:m-4 md:ml-0 md:rounded-xl md:border glass-morphism overflow-hidden z-0 shadow-2xl">
         <MapComponent members={members} />
       </main>
 
@@ -117,7 +117,7 @@ const App = () => {
         </button>
       </div>
 
-      <div className="fixed bottom-2 right-2 text-[8px] text-primary font-bold z-[100]">System Active v3</div>
+      <div className="fixed bottom-2 right-2 text-[8px] text-primary font-bold z-[100]">System Active v4</div>
 
       {/* Sidebar / Bottom Sheet */}
       <aside className="absolute bottom-0 left-0 right-0 md:relative md:bottom-auto md:left-auto md:right-auto md:w-sidebar md:max-w-md md:m-4 md:rounded-xl md:border glass-morphism flex flex-col z-10 max-h-[45dvh] md:max-h-none">

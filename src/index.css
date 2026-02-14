@@ -281,6 +281,15 @@ body {
   position: fixed;
 }
 
+.w-half-forced {
+  width: 50% !important;
+  max-width: 50% !important;
+}
+
+.h-30-forced {
+  height: 30dvh !important;
+}
+
 .w-1\/2 {
   width: 50%;
 }
@@ -290,8 +299,8 @@ body {
 }
 
 .inset-x-1\/4 {
-  left: 25%;
-  right: 25%;
+  left: 25% !important;
+  right: 25% !important;
 }
 
 .inset-y-1\/4 {
