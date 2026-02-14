@@ -9,12 +9,17 @@
   --glass-border: rgba(255, 255, 255, 0.1);
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
 html,
 body {
   height: 100%;
   width: 100%;
-  margin: 0;
-  padding: 0;
 }
 
 body {
