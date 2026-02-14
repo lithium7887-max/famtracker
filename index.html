@@ -21,6 +21,15 @@
         }
       });
     }
+    // Clear corrupted Supabase sessions once
+    try {
+      if (!localStorage.getItem('reset_done_v1')) {
+        Object.keys(localStorage).forEach(key => {
+          if (key.startsWith('sb-')) localStorage.removeItem(key);
+        });
+        localStorage.setItem('reset_done_v1', 'true');
+      }
+    } catch (e) { }
   </script>
 </body>
 
