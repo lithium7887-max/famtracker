@@ -57,24 +57,33 @@ function App() {
   }, [session]);
 
   const fetchMembers = async () => {
-    const { data, error } = await supabase
-      .from('profiles')
-      .select('id, name, lat, lng, updated_at');
-    if (error) console.error(error);
-    else setMembers(data || []);
+    if (!supabase) return;
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('id, name, lat, lng, updated_at');
+      if (error) throw error;
+      setMembers(data || []);
+    } catch (err) {
+      console.error("Fetch members error:", err);
+    }
   };
 
   const updateLocationInSupabase = async (lat, lng) => {
-    if (!session) return;
-    const { error } = await supabase
-      .from('profiles')
-      .upsert({
-        id: session.user.id,
-        lat,
-        lng,
-        updated_at: new Date().toISOString()
-      });
-    if (error) console.error(error);
+    if (!session || !supabase) return;
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .upsert({
+          id: session.user.id,
+          lat,
+          lng,
+          updated_at: new Date().toISOString()
+        });
+      if (error) throw error;
+    } catch (err) {
+      console.error("Update location error:", err);
+    }
   };
 
   if (!session) {
