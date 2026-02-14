@@ -93,24 +93,27 @@ const App = () => {
   }
 
   return (
-    <div className="h-screen w-screen flex flex-col md:flex-row bg-bg-dark">
-      {/* Sidebar */}
-      <aside className="w-full md:w-80 glass-morphism m-4 flex flex-col shadow-2xl">
-        <div className="p-6 border-b border-glass-border flex justify-between items-center">
-          <h1 className="text-xl font-bold flex items-center gap-2">
-            <MapPin className="text-primary" /> Family Trace
+    <div className="h-screen w-screen flex flex-col md:flex-row bg-bg-dark overflow-hidden">
+      {/* Main Map Area - Appears on top on mobile (order-1), on the right on desktop (md:order-2) */}
+      <main className="flex-1 relative m-4 md:m-4 md:ml-0 glass-morphism shadow-2xl overflow-hidden flex flex-col order-1 md:order-2 h-60 md:h-auto">
+        <MapComponent members={members} />
+      </main>
+
+      {/* Sidebar - Appears on bottom on mobile (order-2), on the left on desktop (md:order-1) */}
+      <aside className="w-full md:w-80 glass-morphism m-4 md:m-4 flex flex-col shadow-2xl order-2 md:order-1 h-40 md:h-auto">
+        <div className="p-4 md:p-6 border-b border-glass-border flex justify-between items-center">
+          <h1 className="text-lg md:text-xl font-bold flex items-center gap-2">
+            <MapPin className="text-primary" size={20} /> Family
           </h1>
-          <button onClick={() => supabase.auth.signOut()} className="text-text-muted hover:text-red-400">
+          <button onClick={() => supabase.auth.signOut()} className="text-text-muted hover:text-red-400 p-2">
             <LogOut size={20} />
           </button>
         </div>
 
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
-          <div className="flex items-center justify-between px-2">
-            <h2 className="text-sm font-semibold text-text-muted uppercase tracking-wider">Members</h2>
-            <button className="text-primary hover:text-primary-hover p-1">
-              <Users size={16} />
-            </button>
+          <div className="flex items-center justify-between px-2 mb-2">
+            <h2 className="text-xs font-semibold text-text-muted uppercase tracking-wider">Members</h2>
+            <Users size={16} className="text-text-muted" />
           </div>
 
           {members && members.map(member => {
@@ -125,7 +128,7 @@ const App = () => {
                   {initial}
                 </div>
                 <div className="flex-1 overflow-hidden">
-                  <p className="font-medium truncate">{name}</p>
+                  <p className="font-medium truncate text-sm md:text-base">{name}</p>
                   <p className="text-xs text-text-muted truncate">{time}</p>
                 </div>
                 {session && session.user && member.id === session.user.id && (
@@ -136,18 +139,13 @@ const App = () => {
           })}
         </div>
 
-        <div className="p-4 border-t border-glass-border">
+        <div className="hidden md:block p-4 border-t border-glass-border">
           <button className="w-full py-3 flex items-center justify-center gap-2 text-text-muted hover:text-text-main transition-colors">
             <Settings size={18} />
             <span>Settings</span>
           </button>
         </div>
       </aside>
-
-      {/* Main Map Area */}
-      <main className="flex-1 relative m-4 md:ml-0 glass-morphism shadow-2xl overflow-hidden flex flex-col">
-        <MapComponent members={members} />
-      </main>
     </div>
   );
 }
