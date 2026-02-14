@@ -356,6 +356,10 @@ body {
     height: auto;
   }
 
+  .md\:w-sidebar {
+    width: 24rem;
+  }
+
   .md\:w-80 {
     width: 20rem;
   }

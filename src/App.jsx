@@ -99,7 +99,7 @@ const App = () => {
   return (
     <div className="h-screen w-screen flex flex-col md:flex-row bg-bg-dark overflow-hidden relative">
       {/* Background Map - Full screen on mobile, fills right side on desktop */}
-      <main className="absolute inset-0 md:relative md:flex-1 md:m-4 md:ml-0 md:rounded-xl md:border glass-morphism overflow-hidden z-0">
+      <main className="absolute inset-x-2 inset-y-20 md:inset-auto md:relative md:flex-1 md:m-4 md:ml-0 md:rounded-xl md:border glass-morphism overflow-hidden z-0">
         <MapComponent members={members} />
       </main>
 
@@ -120,7 +120,7 @@ const App = () => {
       <div className="fixed bottom-2 right-2 text-[8px] text-primary font-bold z-[100]">System Active v3</div>
 
       {/* Sidebar / Bottom Sheet */}
-      <aside className="absolute bottom-0 left-0 right-0 md:relative md:bottom-auto md:left-auto md:right-auto md:w-80 md:m-4 md:rounded-xl md:border glass-morphism flex flex-col z-10 max-h-[40dvh] md:max-h-none">
+      <aside className="absolute bottom-0 left-0 right-0 md:relative md:bottom-auto md:left-auto md:right-auto md:w-sidebar md:max-w-md md:m-4 md:rounded-xl md:border glass-morphism flex flex-col z-10 max-h-[45dvh] md:max-h-none">
         {/* Handle for mobile swipe feel */}
         <div className="md:hidden flex justify-center p-2">
           <div className="w-12 h-1.5 bg-glass-border rounded-full" />
