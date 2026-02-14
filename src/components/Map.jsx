@@ -17,8 +17,9 @@ let DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 const MapComponent = ({ members }) => {
-    const center = members.length > 0
-        ? [members[0].lat, members[0].lng]
+    const validMembers = Array.isArray(members) ? members : [];
+    const center = validMembers.length > 0
+        ? [validMembers[0].lat, validMembers[0].lng]
         : [37.5665, 126.9780]; // Default to Seoul
 
     return (
@@ -41,15 +42,17 @@ const MapComponent = ({ members }) => {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {members.map((member) => (
-                    <Marker key={member.id} position={[member.lat, member.lng]}>
-                        <Popup>
-                            <div className="p-2">
-                                <p className="font-bold text-gray-900">{member.name}</p>
-                                <p className="text-xs text-gray-500">Last updated: {new Date(member.updated_at).toLocaleTimeString()}</p>
-                            </div>
-                        </Popup>
-                    </Marker>
+                {validMembers.map((member) => (
+                    member && member.lat && member.lng && (
+                        <Marker key={member.id} position={[member.lat, member.lng]}>
+                            <Popup>
+                                <div className="p-2">
+                                    <p className="font-bold text-gray-900">{member.name || 'Unknown'}</p>
+                                    <p className="text-xs text-gray-500">Last updated: {member.updated_at ? new Date(member.updated_at).toLocaleTimeString() : 'N/A'}</p>
+                                </div>
+                            </Popup>
+                        </Marker>
+                    )
                 ))}
             </MapContainer>
         </div>

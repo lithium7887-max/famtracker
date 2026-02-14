@@ -28,6 +28,7 @@ function App() {
       // Start tracking location
       const watchId = navigator.geolocation.watchPosition(
         (position) => {
+          if (!supabase) return;
           const { latitude, longitude } = position.coords;
           setUserLocation({ lat: latitude, lng: longitude });
           updateLocationInSupabase(latitude, longitude);
