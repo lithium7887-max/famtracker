@@ -96,37 +96,37 @@ const App = () => {
   }
 
   return (
-    <div className="fixed inset-0 bg-bg-dark overflow-hidden">
-      {/* Background Map - Guaranteed 100% */}
-      <div className="absolute inset-0 z-0">
+    <div className="h-screen w-screen flex flex-col bg-bg-dark overflow-hidden">
+      {/* Map Area - 70% Height */}
+      <main className="h-[70dvh] w-full relative z-0 border-b border-glass-border">
         <MapComponent members={members} />
-      </div>
 
-      {/* Floating Header */}
-      <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-20 pointer-events-none">
-        <div className="bg-bg-dark/80 backdrop-blur-md px-4 py-2 rounded-full border border-glass-border flex items-center gap-2 pointer-events-auto shadow-xl">
-          <MapPin className="text-primary" size={16} />
-          <span className="text-sm font-bold">Family Trace</span>
+        {/* Floating Header Overlay */}
+        <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-10 pointer-events-none">
+          <div className="bg-bg-dark/80 backdrop-blur-md px-4 py-2 rounded-full border border-glass-border flex items-center gap-2 pointer-events-auto shadow-lg">
+            <MapPin className="text-primary" size={16} />
+            <span className="text-sm font-bold">Family Trace</span>
+          </div>
+          <button
+            onClick={() => supabase.auth.signOut()}
+            className="bg-bg-dark/80 backdrop-blur-md p-2 rounded-full border border-glass-border text-text-muted hover:text-red-400 pointer-events-auto shadow-lg"
+          >
+            <LogOut size={18} />
+          </button>
         </div>
-        <button
-          onClick={() => supabase.auth.signOut()}
-          className="bg-bg-dark/80 backdrop-blur-md p-2 rounded-full border border-glass-border text-text-muted hover:text-red-400 pointer-events-auto shadow-xl"
-        >
-          <LogOut size={18} />
-        </button>
-      </div>
+      </main>
 
-      {/* Floating Bottom Card */}
-      <aside className="absolute bottom-6 left-4 right-4 max-h-[30dvh] bg-bg-dark/95 backdrop-blur-xl rounded-3xl border border-glass-border flex flex-col z-10 shadow-2xl overflow-hidden pointer-events-auto">
+      {/* Family List Area - 30% Height */}
+      <aside className="h-[30dvh] bg-bg-dark flex flex-col z-10 overflow-hidden shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
         <div className="flex-1 overflow-y-auto p-4 space-y-3">
-          <div className="flex items-center justify-between px-2 mb-1">
-            <h2 className="text-[10px] font-semibold text-text-muted uppercase tracking-wider">Family Members</h2>
+          <div className="flex items-center justify-between px-2 mb-2">
+            <h2 className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Active Members</h2>
             <Users size={14} className="text-text-muted" />
           </div>
 
           {!members.length && (
-            <div className="text-center py-4 text-text-muted text-xs italic">
-              Searching for locations...
+            <div className="text-center py-6 text-text-muted text-xs italic">
+              Finding family locations...
             </div>
           )}
 
@@ -137,15 +137,16 @@ const App = () => {
             const time = member.updated_at ? new Date(member.updated_at).toLocaleTimeString() : 'N/A';
 
             return (
-              <div key={member.id} className="flex items-center gap-3 p-3 rounded-2xl bg-white/5 border border-white/5 hover:border-primary/30 transition-colors">
-                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold uppercase text-xs">
+              <div key={member.id} className="flex items-center gap-3 p-3 rounded-2xl bg-bg-card border border-glass-border hover:border-primary/50 transition-colors">
+                <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold uppercase text-sm">
                   {initial}
                 </div>
                 <div className="flex-1 overflow-hidden">
-                  <p className="font-medium truncate text-xs">{name}</p>
+                  <p className="font-medium truncate text-sm">{name}</p>
+                  <p className="text-[10px] text-text-muted">{time}</p>
                 </div>
                 {session && session.user && member.id === session.user.id && (
-                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
                 )}
               </div>
             );
