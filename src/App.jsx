@@ -95,12 +95,12 @@ const App = () => {
   return (
     <div className="h-screen w-screen flex flex-col md:flex-row bg-bg-dark overflow-hidden p-2 md:p-0">
       {/* Main Map Area */}
-      <main className="relative flex flex-col order-1 md:order-2 flex-6 md:flex-1 md:m-4 md:ml-0 glass-morphism shadow-2xl overflow-hidden mb-2 md:mb-0">
+      <main className="relative flex flex-col order-1 md:order-2 flex-7 md:flex-1 md:m-4 md:ml-0 glass-morphism shadow-2xl overflow-hidden mb-2 md:mb-0">
         <MapComponent members={members} />
       </main>
 
       {/* Sidebar */}
-      <aside className="w-full md:w-80 glass-morphism flex flex-col shadow-2xl order-2 md:order-1 flex-4 md:h-auto md:m-4 overflow-hidden">
+      <aside className="w-full md:w-80 glass-morphism flex flex-col shadow-2xl order-2 md:order-1 flex-3 md:h-auto md:m-4 overflow-hidden">
         <div className="p-3 md:p-6 border-b border-glass-border flex justify-between items-center bg-white/5">
           <h1 className="text-base md:text-xl font-bold flex items-center gap-2">
             <MapPin className="text-primary" size={18} /> Family
