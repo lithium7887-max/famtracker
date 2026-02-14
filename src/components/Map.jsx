@@ -36,11 +36,11 @@ const MapComponent = ({ members = [] }) => {
         : [37.5665, 126.9780];
 
     return (
-        <div className="h-full w-full relative" style={{ minHeight: '300px', backgroundColor: '#0f172a' }}>
+        <div className="h-full w-full relative" style={{ minHeight: '150px', backgroundColor: '#0f172a' }}>
             <MapContainer
                 center={center}
                 zoom={13}
-                style={{ height: '100%', width: '100%', minHeight: '300px' }}
+                style={{ height: '100%', width: '100%', minHeight: '150px' }}
                 zoomControl={false}
             >
                 <TileLayer

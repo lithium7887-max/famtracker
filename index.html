@@ -29,14 +29,11 @@
   </div>
   <script type="module" src="/src/main.jsx"></script>
   <script>
-    // nuclear reset
+    // Cleanup old service workers if any
     try {
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(r => r.unregister()));
       }
-      localStorage.clear();
-      sessionStorage.clear();
-      console.log("Storage cleared");
     } catch (e) { }
   </script>
 </body>

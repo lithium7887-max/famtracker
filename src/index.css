@@ -320,6 +320,10 @@ body {
   border-radius: 16px;
 }
 
+.bg-white\/5 {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
 .bg-bg-dark {
   background-color: var(--bg-dark);
 }
