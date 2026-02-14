@@ -10,6 +10,7 @@ function App() {
   const [userLocation, setUserLocation] = useState(null);
 
   useEffect(() => {
+    if (!supabase) return;
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
     });
